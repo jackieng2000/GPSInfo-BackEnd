@@ -1,0 +1,37 @@
+Technology stack
+
+Ubuntu 24.04
+Python 
+html
+css
+
+Frontend
+javascript
+react
+
+Database
+Postgres 
+
+zsh  
+ohmyzsh
+prowerlevel9
+VScode 
+
+
+virtualenv
+asgiref  3.9.1
+Django   4.2
+pillow   11.3.0
+pip      25.1.1
+psycopg2 2.9.10
+sqlparse 0.5.3
+
+pip install django-cors-headers
+
+Django with Django REST Framework (DRF) for RESTful endpoints
+
+Data Model: A GPSLocation model with fields like latitude, longitude, and timestamp, serialized to JSON.
+
+Testing: Use Chrome for initial testing for backend api interface
+
+The backend deployed through Digital Ocean Droplet
