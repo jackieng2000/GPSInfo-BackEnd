@@ -13,6 +13,7 @@ router = DefaultRouter()
 router.register(r'gpslocations', GPSLocationViewSet)
 
 urlpatterns = [
+    path('', include('pages.urls', namespace='pages')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),  # API endpoints
     # path('api/token/', include('rest_framework_simplejwt.urls')),
