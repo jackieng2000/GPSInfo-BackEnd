@@ -1,32 +1,19 @@
 from django.contrib import admin
-from .models import GPSLocation
+from .models import GPSLocation, GPSLatest
 
+@admin.register(GPSLatest)
+class GPSLatestAdmin(admin.ModelAdmin):
+    list_display = ('user', 'latitude', 'longitude', 'timestamp', 'altitude', 'accuracy')
+    list_filter = ('timestamp',)
+    search_fields = ('user__username',)
+    readonly_fields = ('timestamp',)
+    ordering = ('-timestamp',)
+
+# Optionally, register GPSLocation if not already registered
 @admin.register(GPSLocation)
 class GPSLocationAdmin(admin.ModelAdmin):
-    """
-    Admin configuration for the GPSLocation model.
-    """
-    list_display = ('user', 'latitude', 'longitude', 'altitude', 'accuracy', 'timestamp')
-    list_filter = ('user', 'timestamp')
-    search_fields = ('user__username', 'latitude', 'longitude')
-    date_hierarchy = 'timestamp'
-    ordering = ('-timestamp',)
+    list_display = ('user', 'latitude', 'longitude', 'timestamp', 'altitude', 'accuracy')
+    list_filter = ('timestamp', 'user')
+    search_fields = ('user__username',)
     readonly_fields = ('timestamp',)
-
-    fieldsets = (
-        (None, {
-            'fields': ('user', 'latitude', 'longitude')
-        }),
-        ('Optional Fields', {
-            'fields': ('altitude', 'accuracy')
-        }),
-        ('Metadata', {
-            'fields': ('timestamp',)
-        }),
-    )
-
-    def get_queryset(self, request):
-        """
-        Optimize queryset by selecting related user to avoid additional queries.
-        """
-        return super().get_queryset(request).select_related('user')
+    ordering = ('-timestamp',)

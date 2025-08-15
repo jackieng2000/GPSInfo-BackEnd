@@ -1,20 +1,11 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
+# gpsinfo/views.py
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from .models import GPSLocation
-from .serializers import GPSLocationSerializer
-from accounts.models import Profile  # Adjust if accounts app is different
-
-
-# class GPSLocationViewSet(viewsets.ModelViewSet):
-#     queryset = GPSLocation.objects.all()
-#     serializer_class = GPSLocationSerializer
-#     permission_classes = [IsAuthenticated]
-
-#     def perform_create(self, serializer):
-#         serializer.save(user=self.request.user)
-
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import GPSLocation, GPSLatest
+from .serializers import GPSLocationSerializer, GPSLatestSerializer
+from django.contrib.auth.models import User
 
 class GPSLocationViewSet(viewsets.ModelViewSet):
     queryset = GPSLocation.objects.all()
@@ -22,13 +13,29 @@ class GPSLocationViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        # Save the GPSLocation
+        gps_location = serializer.save(user=self.request.user)
+        
+        # Update or create GPSLatest
+        GPSLatest.objects.update_or_create(
+            user=self.request.user,
+            defaults={
+                'latitude': gps_location.latitude,
+                'longitude': gps_location.longitude,
+                'timestamp': gps_location.timestamp,
+                'altitude': gps_location.altitude,
+                'accuracy': gps_location.accuracy,
+            }
+        )
 
-    @action(detail=False, methods=['get'], url_path='group/(?P<group>\w+)')
-    def get_group_records(self, request, group=None):
-        # Fetch users in the group
-        users_in_group = Profile.objects.filter(userGroup=group).values_list('user', flat=True)
-        # Fetch GPS records for those users
-        queryset = GPSLocation.objects.filter(user__in=users_in_group).order_by('-timestamp')
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+    @action(detail=False, methods=['get'], url_path='latest')
+    def get_latest_locations(self, request):
+        """
+        Fetch the latest GPS location for all users.
+        """
+        user = request.user
+        if user.is_authenticated:
+            latest_locations = GPSLatest.objects.all()
+            serializer = GPSLatestSerializer(latest_locations, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({"error": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)

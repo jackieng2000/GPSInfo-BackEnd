@@ -1,17 +1,24 @@
 Technology stack
 
-Ubuntu 24.04
-Python 
-html
-css
+git
+github
 
 Frontend
+--------
+Vite + React Framework
+axios
+localStorage in React to store the GPS position of user and other users  
 javascript
-react
+vscode
 
-Database
-Postgres 
 
+backend
+-------
+Ubuntu 24.04
+Python 3.12.4
+html
+css
+Postgres 16
 zsh  
 ohmyzsh
 prowerlevel9
@@ -25,13 +32,17 @@ pillow   11.3.0
 pip      25.1.1
 psycopg2 2.9.10
 sqlparse 0.5.3
+django-cors-headers
+Django REST Framework (DRF) for RESTful endpoints
 
-pip install django-cors-headers
 
-Django with Django REST Framework (DRF) for RESTful endpoints
+Production
+DigitalOcean Droplet
 
+System Function
 Data Model: A GPSLocation model with fields like latitude, longitude, and timestamp, serialized to JSON.
 
-Testing: Use Chrome for initial testing for backend api interface
-
-The backend deployed through Digital Ocean Droplet
+The frontend is on mobile phone. 
+The GPSLocation will be stored every 15sec in localStorage by standard map component and 
+the data will be send to backend through django restful api gateway every 15 sec for recording
+Another function will call the backend to send out the latest position of all users.

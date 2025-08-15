@@ -1,6 +1,26 @@
 import os
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from datetime import timedelta
+
+# Existing REST_FRAMEWORK settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+# Add SIMPLE_JWT configuration
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  # Set access token to expire after 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),   # Set refresh token to expire after 7 days
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
+}
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -16,7 +36,7 @@ SECRET_KEY = 'django-insecure-h#$@$qy3co4rbvpt=g!*0j$-ybcz9!q5)u9opobj%zk150y6wj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['209.97.164.73', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -57,6 +77,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=1),  # Set to 1 hour
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),   # Optional: Set refresh token lifetime
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': False,
 }
 
 CORS_ALLOWED_ORIGINS = [
