@@ -89,10 +89,17 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8001",  # Adjust for your frontend host
-     "http://localhost:8000",
+    "http://localhost:8000",
+    "http://209.97.164.73:5173",
+    "http://localhost:5173",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://209.97.164.73:5173",
+#     "http://localhost:5173",
+# ]
 
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",  # Adjust for your frontend URL
