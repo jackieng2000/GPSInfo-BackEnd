@@ -38,6 +38,9 @@ Django REST Framework (DRF) for RESTful endpoints
 
 Production
 DigitalOcean Droplet
+frontEnd and backend initially not use web sever nginx gunicorn
+Frontend Project Directory = home/jackieng/GPSInfo-FrontEnd
+Backend Project Directory = home/jackieng/GPSInfo-BackEnd
 
 System Function
 Data Model: A GPSLocation model with fields like latitude, longitude, and timestamp, serialized to JSON.
