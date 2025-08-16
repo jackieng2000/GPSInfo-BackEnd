@@ -26,6 +26,7 @@ VScode
 
 
 virtualenv
+Name of the virtualenv : penv
 asgiref  3.9.1
 Django   4.2
 pillow   11.3.0
