@@ -3,7 +3,7 @@ Technology stack
 git
 github
 
-Frontend
+Frontend - Development
 --------
 Vite + React Framework
 axios
@@ -12,7 +12,7 @@ javascript
 vscode
 
 
-backend
+Backend - Development
 -------
 Ubuntu 24.04
 Python 3.12.4
@@ -23,7 +23,7 @@ zsh
 ohmyzsh
 prowerlevel9
 VScode 
-
+Project Directory = home/jackieng/GPSInfo-BackEnd
 
 virtualenv
 Name of the virtualenv : penv
@@ -39,7 +39,9 @@ Django REST Framework (DRF) for RESTful endpoints
 
 Production
 DigitalOcean Droplet
-frontEnd and backend initially not use web sever nginx gunicorn
+Domain name : jackieng.hk
+nginx and gunicorn
+frontEnd and backend initially not use web sever nginx 
 Frontend Project Directory = home/jackieng/GPSInfo-FrontEnd
 Backend Project Directory = home/jackieng/GPSInfo-BackEnd
 
