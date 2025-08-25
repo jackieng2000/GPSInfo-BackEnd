@@ -36,7 +36,8 @@ SECRET_KEY = 'django-insecure-h#$@$qy3co4rbvpt=g!*0j$-ybcz9!q5)u9opobj%zk150y6wj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['209.97.164.73', 'jackieng.hk','127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['209.97.164.73', 'jackieng.hk','127.0.0.1',
+ 'localhost','backend.jackieng.hk', 'test.jackieng.hk']
 
 
 # Application definition
@@ -191,6 +192,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'rbackend/static'),
+]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
